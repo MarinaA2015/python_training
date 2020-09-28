@@ -10,18 +10,13 @@ def app(request):
     request.addfinalizer(fixture.destroy)
     return fixture
 
-
 def test_add_new_group(app):
-    app.open_application()
-    app.login("admin", "secret")
-    app.create_group(Group("GroupName", "GroupHeader", "GroupFooter"))
-    app.return_to_group()
-    app.logout()
+    app.session.login("admin", "secret")
+    app.group.create(Group("GroupName", "GroupHeader", "GroupFooter"))
+    app.session.logout()
 
 def test_empty_group(app):
-    app.open_application()
-    app.login("admin", "secret")
-    app.create_group(Group("", "", ""))
-    app.return_to_group()
-    app.logout()
+    app.session.login("admin", "secret")
+    app.group.create(Group("", "", ""))
+    app.session.logout()
 

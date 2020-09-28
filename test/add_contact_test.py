@@ -12,7 +12,6 @@ def app(request):
 
 
 def test_add_new_contact(app):
-    app.open_application()
-    app.login("admin", "secret")
-    app.create_contact(Contact("FirstName", "LastName", "Company", "Telephone"))
-    app.logout()
+    app.session.login("admin", "secret")
+    app.contact.create(Contact("FirstName", "LastName", "Company", "Telephone"))
+    app.session.logout()
