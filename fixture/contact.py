@@ -20,15 +20,18 @@ class ContactHelper:
     def fill_contact_form(self, contact):
         wd = self.app.wd
         # fill contact form
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.first_name)
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.last_name)
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(contact.company)
-        wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(contact.home_phone)
+        self.fill_field("firstname",contact.first_name)
+        self.fill_field("lastname", contact.last_name)
+        self.fill_field("company", contact.company)
+        self.fill_field("home", contact.home_phone)
+
+
+    def fill_field(self,name_field, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(name_field).click()
+            wd.find_element_by_name(name_field).clear()
+            wd.find_element_by_name(name_field).send_keys(text)
 
     def delete_first(self):
         wd = self.app.wd
