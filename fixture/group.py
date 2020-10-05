@@ -7,6 +7,10 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("groups").click()
 
+    def return_to_home(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+
     def delete_first(self):
         wd = self.app.wd
         self.open_groups_page()
