@@ -5,7 +5,8 @@ class ContactHelper:
 
     def return_to_home(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not (len(wd.find_elements_by_xpath("//a[contains(text(),'Last name')]")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def create(self, contact):
         wd = self.app.wd
