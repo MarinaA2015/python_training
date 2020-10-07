@@ -3,7 +3,7 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def return_to_home(self):
+    def open_home(self):
         wd = self.app.wd
         if not (len(wd.find_elements_by_xpath("//a[contains(text(),'Last name')]")) > 0):
             wd.find_element_by_link_text("home").click()
@@ -16,7 +16,7 @@ class ContactHelper:
         # submit contact creation
         wd.find_element_by_name("submit").click()
         # return to home page
-        self.return_to_home()
+        self.open_home()
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
@@ -40,7 +40,7 @@ class ContactHelper:
         #delete the element
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         # return to home page
-        self.return_to_home()
+        self.open_home()
 
     def edit_first(self,contact):
         wd = self.app.wd
@@ -49,7 +49,7 @@ class ContactHelper:
         #update the element
         wd.find_element_by_xpath("//input[@value='Update']").click()
         # return to home page
-        self.return_to_home()
+        self.open_home()
 
     def edit_first_contact(self):
         wd = self.app.wd
@@ -58,4 +58,5 @@ class ContactHelper:
 
     def count(self):
         wd = self.app.wd
+        self.open_home()
         return len(wd.find_elements_by_xpath("//img[@title='Edit']"))

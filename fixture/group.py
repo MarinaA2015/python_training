@@ -8,7 +8,7 @@ class GroupHelper:
         if not (wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("new")) > 0):
             wd.find_element_by_link_text("groups").click()
 
-    def return_to_home(self):
+    def open_home(self):
         wd = self.app.wd
         if not(len(wd.find_elements_by_xpath("//a[contains(text(),'Last name')]"))>0):
             wd.find_element_by_link_text("home").click()
