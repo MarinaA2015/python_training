@@ -1,3 +1,4 @@
+from model.contact import Contact
 
 class ContactHelper:
     def __init__(self, app):
@@ -60,3 +61,13 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home()
         return len(wd.find_elements_by_xpath("//img[@title='Edit']"))
+
+    def get_contacts_list(self):
+        wd = self.app.wd
+        contacts = []
+        for el in wd.find_elements_by_name("entry"):
+            id = el.find_element_by_name("selected[]").get_attribute("value")
+            name = el.find_element_by_xpath(".//td[3]").text
+            last_name = el.find_element_by_xpath(".//td[2]").text
+            contacts.append(Contact(id=id, first_name=name, last_name=last_name))
+        return contacts
