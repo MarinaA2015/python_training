@@ -1,14 +1,28 @@
 # -*- coding: utf-8 -*-
 
+
 from model.group import Group
 
 
 def test_add_new_group(app):
-    #app.session.login("admin", "secret")
-    app.group.create(Group("GroupName", "GroupHeader", "GroupFooter"))
+    old_groups = app.group.get_groups_list()
+    group_new = Group("GroupName", "GroupHeader", "GroupFooter")
+    app.group.create(group_new)
+    new_groups = app.group.get_groups_list()
+    assert len(old_groups)+1 == len(new_groups)
+    old_groups.append(group_new)
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
     app.group.open_home()
-    #app.session.logout()
+
 
 def test_empty_group(app):
-   app.group.create(Group("", "", ""))
-   app.group.open_home()
+
+    old_groups = app.group.get_groups_list()
+    group_new = Group("", "", "")
+    app.group.create(group_new)
+    new_groups = app.group.get_groups_list()
+    app.group.open_home()
+    assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(group_new)
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+    app.group.open_home()
