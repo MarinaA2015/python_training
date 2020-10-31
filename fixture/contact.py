@@ -87,9 +87,12 @@ class ContactHelper:
                 id = el.find_element_by_name("selected[]").get_attribute("value")
                 first_name = el.find_element_by_xpath(".//td[3]").text
                 last_name = el.find_element_by_xpath(".//td[2]").text
+                address = el.find_element_by_xpath(".//td[4]").text
+                all_email = el.find_element_by_xpath(".//td[5]").text
                 all_phones = el.find_element_by_xpath(".//td[6]").text
                 self.contact_cache.append(Contact(id=id, first_name=first_name, last_name=last_name,
-                                                  all_phones_from_contact_page=all_phones))
+                                                  all_phones_from_contact_page=all_phones, address=address,
+                                                  all_email=all_email))
         return self.contact_cache
 
     def get_contact_info_from_edit_page(self, index):
@@ -102,9 +105,14 @@ class ContactHelper:
         mobile_phone = wd.find_element_by_name("mobile").get_attribute("value")
         work_phone = wd.find_element_by_name("work").get_attribute("value")
         second_phone = wd.find_element_by_name("phone2").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
         self.open_home()
         return Contact(id=id, first_name=first_name, last_name=last_name,  home_phone=home_phone,
-                       mobile_phone=mobile_phone, work_phone=work_phone, second_phone=second_phone)
+                       mobile_phone=mobile_phone, work_phone=work_phone, second_phone=second_phone,
+                       address=address, email=email, email2=email2, email3=email3)
 
 
 
