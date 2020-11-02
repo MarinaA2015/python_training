@@ -6,12 +6,20 @@ from fixture.session import SessionHelper
 
 
 class Application:
-    def __init__(self):
-        self.wd = webdriver.Firefox()
+    def __init__(self,browser,baseUrl):
+        if browser == "firefox":
+            self.wd = webdriver.Firefox()
+        elif browser == "chrome":
+            self.wd = webdriver.Chrome()
+        elif browser == "ie":
+            self.wd = webdriver.Ie()
+        else:
+            raise ValueError ("Unrecognized browser %s" % browser)
         self.wd.implicitly_wait(3)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
+        self.baseUrl = baseUrl
 
     def isValid(self):
         try:
@@ -23,7 +31,7 @@ class Application:
     def open_application(self):
         wd = self.wd
         # open application
-        wd.get("http://localhost/addressbook/")
+        wd.get(self.baseUrl)
 
     def destroy(self):
         self.wd.quit()
