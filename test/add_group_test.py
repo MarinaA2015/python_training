@@ -2,8 +2,9 @@
 from model.group import Group
 
 
-def test_add_group(app, data_groups):
-    group = data_groups
+def test_add_group(app, json_groups):
+    #group = data_groups
+    group = json_groups;
     old_groups = app.group.get_groups_list()
     #group_new = Group("GroupName", "GroupHeader", "GroupFooter")
     app.group.create(group)
